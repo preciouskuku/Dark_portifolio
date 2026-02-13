@@ -1,0 +1,129 @@
+import { useState } from "react";
+
+const categories = [
+  {
+    id: "languages",
+    label: "Languages",
+    color: "#3b82f6",
+    skills: ["Python", "TypeScript", "JavaScript", "C#", "Java", "SQL"],
+  },
+  {
+    id: "frameworks",
+    label: "Frameworks",
+    color: "#a855f7",
+    skills: ["Django", "Flask", "React", "Next.js", "Spring Boot", "Node.js"],
+  },
+  {
+    id: "cloud",
+    label: "Cloud & DevOps",
+    color: "#f97316",
+    skills: ["AWS", "Docker", "Kubernetes", "Jenkins", "GitLab CI", "PostgreSQL"],
+  },
+  {
+    id: "security",
+    label: "Security",
+    color: "#ef4444",
+    skills: ["Burp Suite", "OWASP ZAP", "Metasploit", "Kali Linux", "Pen Testing"],
+  },
+  {
+    id: "ai",
+    label: "AI & Emerging",
+    color: "#22c55e",
+    skills: ["Business AI Automations", "Prompt Engineering", "LangChain", "Voiceflow", "Machine Learning"],
+  },
+];
+
+function SkillPill({ label, accentColor }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        padding: "8px 16px",
+        borderRadius: "6px",
+        border: `1px solid ${hovered ? accentColor : "rgba(255,255,255,0.1)"}`,
+        borderLeft: `3px solid ${accentColor}`,
+        background: hovered ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.04)",
+        color: "#e5e7eb",
+        fontSize: "13px",
+        transition: "all 0.2s ease",
+      }}
+    >
+      {label}
+    </div>
+  );
+}
+
+function CategoryBlock({ category }) {
+  return (
+    <div>
+      <h3
+        style={{
+          marginBottom: "16px",
+          fontSize: "16px",
+          fontWeight: 600,
+          color: "#ffffff",
+        }}
+      >
+        {category.label}
+      </h3>
+
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+        {category.skills.map((skill) => (
+          <SkillPill
+            key={skill}
+            label={skill}
+            accentColor={category.color}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default function TechnicalArsenal() {
+  return (
+    <section
+      style={{
+        padding: "120px 24px",
+        background: "#0f172a",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+        }}
+      >
+        {/* Section Title */}
+        <h2
+          style={{
+            fontSize: "28px",
+            fontWeight: 700,
+            marginBottom: "60px",
+            color: "#ffffff",
+          }}
+        >
+          Technical Arsenal
+        </h2>
+
+        {/* Grid */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+            gap: "40px",
+          }}
+        >
+          {categories.map((category) => (
+            <CategoryBlock key={category.id} category={category} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
