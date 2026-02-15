@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const categories = [
   {
@@ -29,7 +29,13 @@ const categories = [
     id: "ai",
     label: "AI & Emerging",
     color: "#22c55e",
-    skills: ["Business AI Automations", "Prompt Engineering", "LangChain", "Voiceflow", "Machine Learning"],
+    skills: [
+      "Business AI Automations",
+      "Prompt Engineering",
+      "LangChain",
+      "Voiceflow",
+      "Machine Learning",
+    ],
   },
 ];
 
@@ -43,13 +49,17 @@ function SkillPill({ label, accentColor }) {
       style={{
         display: "inline-flex",
         alignItems: "center",
-        padding: "8px 16px",
-        borderRadius: "6px",
-        border: `1px solid ${hovered ? accentColor : "rgba(255,255,255,0.1)"}`,
+        padding: "10px 18px",
+        borderRadius: "8px",
+        border: `1px solid ${
+          hovered ? accentColor : "rgba(255,255,255,0.1)"
+        }`,
         borderLeft: `3px solid ${accentColor}`,
-        background: hovered ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.04)",
+        background: hovered
+          ? "rgba(255,255,255,0.08)"
+          : "rgba(255,255,255,0.04)",
         color: "#e5e7eb",
-        fontSize: "13px",
+        fontSize: "14px",
         transition: "all 0.2s ease",
       }}
     >
@@ -60,11 +70,20 @@ function SkillPill({ label, accentColor }) {
 
 function CategoryBlock({ category }) {
   return (
-    <div>
+    <div
+      style={{
+        padding: "32px",
+        background: "rgba(255,255,255,0.04)",
+        borderRadius: "14px",
+        border: "1px solid rgba(255,255,255,0.08)",
+        backdropFilter: "blur(6px)",
+        transition: "all 0.3s ease",
+      }}
+    >
       <h3
         style={{
-          marginBottom: "16px",
-          fontSize: "16px",
+          marginBottom: "20px",
+          fontSize: "18px",
           fontWeight: 600,
           color: "#ffffff",
         }}
@@ -72,7 +91,7 @@ function CategoryBlock({ category }) {
         {category.label}
       </h3>
 
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
         {category.skills.map((skill) => (
           <SkillPill
             key={skill}
@@ -86,10 +105,23 @@ function CategoryBlock({ category }) {
 }
 
 export default function TechnicalArsenal() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkSize();
+    window.addEventListener("resize", checkSize);
+
+    return () => window.removeEventListener("resize", checkSize);
+  }, []);
+
   return (
     <section
       style={{
-        padding: "120px 24px",
+        padding: "120px 40px",
         background: "#0f172a",
       }}
     >
@@ -102,25 +134,30 @@ export default function TechnicalArsenal() {
         {/* Section Title */}
         <h2
           style={{
-            fontSize: "28px",
+            fontSize: "30px",
             fontWeight: 700,
-            marginBottom: "60px",
+            marginBottom: "70px",
             color: "#ffffff",
           }}
         >
           Technical Arsenal
         </h2>
 
-        {/* Grid */}
+        {/* Grid Layout */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-            gap: "40px",
+            gridTemplateColumns: isMobile
+              ? "1fr"
+              : "repeat(3, 1fr)",
+            gap: "60px",
           }}
         >
           {categories.map((category) => (
-            <CategoryBlock key={category.id} category={category} />
+            <CategoryBlock
+              key={category.id}
+              category={category}
+            />
           ))}
         </div>
       </div>
