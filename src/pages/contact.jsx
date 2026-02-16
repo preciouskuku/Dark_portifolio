@@ -18,10 +18,11 @@ const CONFIG = {
     publicKey: "YOUR_PUBLIC_KEY",
   },
   socials: {
-    github: "https://github.com/YOUR_USERNAME",
-    linkedin: "https://linkedin.com/in/YOUR_USERNAME",
+    github: "https://github.com/preciouskuku",
+    linkedin: "www.linkedin.com/in/precious-k-mutema",
     email: "mailto:preciouskmutema@gmail.com",
   },
+  cvLink: "/Precious Mutema CV (Software Developer).pdf.pdf", // <-- your CV file in /public folder
 };
 
 // ============================================================
@@ -116,7 +117,6 @@ export default function ContactSection() {
           display: flex;
           justify-content: center;
           align-items: center;
-          
         }
 
         .form-card {
@@ -151,9 +151,7 @@ export default function ContactSection() {
         }
       `}</style>
 
-      <section 
-      id="contact"
-      className="contact-wrapper">
+      <section id="contact" className="contact-wrapper">
         <div className="form-card">
           <h2
             style={{
@@ -168,7 +166,6 @@ export default function ContactSection() {
             <span
               style={{
                 background: "linear-gradient(90deg,#2563eb,#38bdf8)",
-                  
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
@@ -176,6 +173,17 @@ export default function ContactSection() {
               Extraordinary
             </span>
           </h2>
+
+          {/* DOWNLOAD CV BUTTON */}
+          <div style={{ textAlign: "center", marginBottom: "24px" }}>
+            <a
+              href={CONFIG.cvLink}
+              download
+              className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-full transition-all"
+            >
+              Download CV
+            </a>
+          </div>
 
           <div className="form-grid">
             <div>

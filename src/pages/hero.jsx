@@ -99,7 +99,7 @@ export default function PortfolioHero() {
         {/* CTA BUTTONS */}
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <button
-            onClick={() => scrollTo("projects")}
+            onClick={() => scrollTo("project")}
             className="bg-white text-slate-900 px-8 py-3 rounded-full font-semibold hover:scale-105 transition-all"
           >
             View Work
@@ -153,8 +153,8 @@ export default function PortfolioHero() {
             size={30}
           />
           <Briefcase
-            onClick={() => scrollTo("projects")}
-            className={navIconClass("projects")}
+            onClick={() => scrollTo("project")}
+            className={navIconClass("project")}
             size={30}
           />
 
