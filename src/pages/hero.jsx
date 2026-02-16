@@ -19,10 +19,10 @@ export default function PortfolioHero() {
 
       {/* LEFT FIXED SOCIALS (DESKTOP) */}
       <div className="hidden lg:flex flex-col gap-6 absolute left-10 top-1/2 -translate-y-1/2 z-20">
-        <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/preciouskuku" target="_blank" rel="noopener noreferrer">
           <Github className="icon-btn text-slate-400 hover:text-white cursor-pointer" />
         </a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+        <a href="www.linkedin.com/in/precious-k-mutema" target="_blank" rel="noopener noreferrer">
           <Linkedin className="icon-btn text-slate-400 hover:text-white cursor-pointer" />
         </a>
         <a href="mailto:preciouskmutema@gmail.com">
