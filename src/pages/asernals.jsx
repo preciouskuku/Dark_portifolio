@@ -5,26 +5,21 @@ const categories = [
     id: "languages",
     label: "Languages",
     color: "#3b82f6",
-    skills: ["Python", "TypeScript", "JavaScript", "C#", "Java", "SQL"],
+    skills: ["Python", "TypeScript", "JavaScript",  "SQL"],
   },
   {
     id: "frameworks",
     label: "Frameworks",
     color: "#a855f7",
-    skills: ["Django", "Flask", "React", "Next.js", "Spring Boot", "Node.js"],
+    skills: [ "React Native", "React", "Next.js", "Spring Boot", "Node.js"],
   },
   {
     id: "cloud",
     label: "Cloud & DevOps",
     color: "#f97316",
-    skills: ["AWS", "Docker", "Kubernetes", "Jenkins", "GitLab CI", "PostgreSQL"],
+    skills: ["AWS", "Docker",  "GitLab CI", ],
   },
-  {
-    id: "security",
-    label: "Security",
-    color: "#ef4444",
-    skills: ["Burp Suite", "OWASP ZAP", "Metasploit", "Kali Linux", "Pen Testing"],
-  },
+ 
   {
     id: "ai",
     label: "AI & Emerging",
@@ -32,8 +27,6 @@ const categories = [
     skills: [
       "Business AI Automations",
       "Prompt Engineering",
-      "LangChain",
-      "Voiceflow",
       "Machine Learning",
     ],
   },
@@ -122,7 +115,7 @@ export default function TechnicalArsenal() {
     <section
       style={{
         padding: "120px 40px",
-        background: "#0f172a",
+       
       }}
     >
       <div

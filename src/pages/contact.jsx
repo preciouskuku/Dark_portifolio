@@ -116,7 +116,7 @@ export default function ContactSection() {
           display: flex;
           justify-content: center;
           align-items: center;
-          background: linear-gradient(135deg,#040d1a,#071428,#080e22);
+          
         }
 
         .form-card {
@@ -165,8 +165,8 @@ export default function ContactSection() {
             Let’s Build Something{" "}
             <span
               style={{
-                background:
-                  "linear-gradient(90deg,#38bdf8,#60a5fa)",
+                background: "linear-gradient(90deg,#2563eb,#38bdf8)",
+                  
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}

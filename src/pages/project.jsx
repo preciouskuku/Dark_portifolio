@@ -9,7 +9,6 @@ const projects = [
       "Secure microfinance platform connecting individuals to financial institutions. Handling 10k+ daily transactions with Python & Django.",
     tags: ["Python", "Django", "Next.js"],
     tagColor: "#38bdf8",
-    image: null,
     bgGradient:
       "linear-gradient(135deg, #0f1f35 0%, #0d1b2e 50%, #111827 100%)",
     iconBg: "rgba(59,130,246,0.15)",
@@ -30,7 +29,6 @@ const projects = [
       "Modern wellness platform featuring booking systems and mobile-first design for a Personal Coaching Service in Australia.",
     tags: ["React", "Tailwind", "Node"],
     tagColor: "#c084fc",
-    image: null,
     bgGradient:
       "linear-gradient(135deg, #1a0a2e 0%, #160d28 50%, #1e0a35 100%)",
     iconBg: "rgba(168,85,247,0.15)",
@@ -52,7 +50,6 @@ const projects = [
       "Student management system for tracking academic progress, assignments, and performance analytics across institutions.",
     tags: ["Next.js", "PostgreSQL", "Python"],
     tagColor: "#f97316",
-    image: null,
     bgGradient:
       "linear-gradient(135deg, #1a0a0a 0%, #2a1010 50%, #1f0f0a 100%)",
     iconBg: "rgba(249,115,22,0.15)",
@@ -73,7 +70,6 @@ const projects = [
       "Business automation platform powered by LangChain and GPT. Reduces manual workflows by 70% for SMEs using AI agents.",
     tags: ["LangChain", "Python", "React"],
     tagColor: "#22c55e",
-    image: null,
     bgGradient:
       "linear-gradient(135deg, #021a0f 0%, #041f12 50%, #071a10 100%)",
     iconBg: "rgba(34,197,94,0.15)",
@@ -94,17 +90,21 @@ function ProjectCard({ project, delay }) {
 
   return (
     <div
+      onClick={() => window.open(project.live, "_blank")}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
         borderRadius: "16px",
         overflow: "hidden",
         background: "#0d1524",
-        border: `1px solid ${hovered ? project.accentColor + "55" : "rgba(255,255,255,0.08)"}`,
+        border: `1px solid ${
+          hovered ? project.accentColor + "55" : "rgba(255,255,255,0.08)"
+        }`,
         transform: hovered ? "translateY(-4px)" : "none",
         transition: "all 0.3s ease",
         animation: "fadeSlideUp 0.6s ease both",
         animationDelay: `${delay}ms`,
+        cursor: "pointer",
       }}
     >
       {/* TOP */}
@@ -132,6 +132,7 @@ function ProjectCard({ project, delay }) {
           {project.icon}
         </div>
 
+        {/* ICON LINKS */}
         <div
           style={{
             position: "absolute",
@@ -143,10 +144,20 @@ function ProjectCard({ project, delay }) {
             transition: "all 0.3s ease",
           }}
         >
-          <a href={project.github} target="_blank" rel="noreferrer">
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noreferrer"
+            onClick={(e) => e.stopPropagation()}
+          >
             <Github size={18} color="white" />
           </a>
-          <a href={project.live} target="_blank" rel="noreferrer">
+          <a
+            href={project.live}
+            target="_blank"
+            rel="noreferrer"
+            onClick={(e) => e.stopPropagation()}
+          >
             <ExternalLink size={18} color="white" />
           </a>
         </div>
@@ -154,14 +165,25 @@ function ProjectCard({ project, delay }) {
 
       {/* CONTENT */}
       <div style={{ padding: "24px" }}>
-        <h3 style={{ color: "#fff", marginBottom: "10px" }}>{project.title}</h3>
-        <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "14px", marginBottom: "16px" }}>
+        <h3 style={{ color: "#fff", marginBottom: "10px" }}>
+          {project.title}
+        </h3>
+        <p
+          style={{
+            color: "rgba(255,255,255,0.6)",
+            fontSize: "14px",
+            marginBottom: "16px",
+          }}
+        >
           {project.description}
         </p>
 
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
           {project.tags.map((tag) => (
-            <span key={tag} style={{ color: project.tagColor, fontSize: "13px" }}>
+            <span
+              key={tag}
+              style={{ color: project.tagColor, fontSize: "13px" }}
+            >
               {tag}
             </span>
           ))}
@@ -175,10 +197,6 @@ export default function FeaturedWorks() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Space+Mono:wght@700&display=swap');
-
-        * { box-sizing: border-box; }
-
         @keyframes fadeSlideUp {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
@@ -205,11 +223,18 @@ export default function FeaturedWorks() {
         }
       `}</style>
 
-      <section className="section-wrapper" style={{ minHeight: "100vh", background: "#040d1a" }}>
+      <section className="section-wrapper" style={{ minHeight: "100vh" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "40px" }}>
-            <span style={{ color: "#38bdf8", fontFamily: "Space Mono" }}>03.</span>
-            <h2 style={{ color: "#fff", fontFamily: "DM Sans" }}>Featured Works</h2>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "12px",
+              marginBottom: "40px",
+            }}
+          >
+            <span style={{ color: "#38bdf8" }}>03.</span>
+            <h2 style={{ color: "#fff" }}>Featured Works</h2>
           </div>
 
           <div className="projects-grid">
