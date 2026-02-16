@@ -113,6 +113,7 @@ export default function TechnicalArsenal() {
 
   return (
     <section
+      id="skills"
       style={{
         padding: "120px 40px",
        

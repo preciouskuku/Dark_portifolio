@@ -151,7 +151,9 @@ export default function ContactSection() {
         }
       `}</style>
 
-      <section className="contact-wrapper">
+      <section 
+      id="contact"
+      className="contact-wrapper">
         <div className="form-card">
           <h2
             style={{

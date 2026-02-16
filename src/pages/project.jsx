@@ -204,7 +204,9 @@ export default function FeaturedWorks() {
         }
       `}</style>
 
-      <section className="section-wrapper" style={{ minHeight: "100vh" }}>
+      <section
+      id="project"
+      className="section-wrapper" style={{ minHeight: "100vh" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div
             style={{

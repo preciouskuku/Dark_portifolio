@@ -3,7 +3,10 @@ import { Briefcase } from 'lucide-react';
 
 export default function AboutExperience() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white py-20 px-6">
+   <div
+  id="about"
+  className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white py-20 px-6"
+>
       <div className="container mx-auto max-w-6xl">
         
         {/* Section Header */}
