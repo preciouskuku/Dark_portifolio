@@ -1,28 +1,21 @@
 import { useState } from "react";
-import {
-  Github,
-  Linkedin,
-  Mail,
-  Send,
-  CheckCircle,
-  AlertCircle,
-} from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 
 // ============================================================
 // 🔧 CONFIGURATION
 // ============================================================
 const CONFIG = {
   emailjs: {
-    serviceId: "YOUR_SERVICE_ID",
-    templateId: "YOUR_TEMPLATE_ID",
-    publicKey: "YOUR_PUBLIC_KEY",
+    serviceId: "service_30b3efl",
+    templateId: "template_da37l5u",
+    publicKey: "RAft50CnMu9_awRjM",
   },
   socials: {
     github: "https://github.com/preciouskuku",
-    linkedin: "www.linkedin.com/in/precious-k-mutema",
+    linkedin: "https://www.linkedin.com/in/precious-k-mutema",
     email: "mailto:preciouskmutema@gmail.com",
   },
-  cvLink: "/Precious Mutema CV (Software Developer).pdf.pdf", // <-- your CV file in /public folder
+  cvLink: "/Precious Mutema CV (Software Developer).pdf.pdf", // <-- spaces URL-encoded
 };
 
 // ============================================================
@@ -67,31 +60,26 @@ export default function ContactSection() {
     setStatus("sending");
 
     try {
-      const res = await fetch(
-        "https://api.emailjs.com/api/v1.0/email/send",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            service_id: CONFIG.emailjs.serviceId,
-            template_id: CONFIG.emailjs.templateId,
-            user_id: CONFIG.emailjs.publicKey,
-            template_params: {
-              from_name: form.name,
-              from_email: form.email,
-              message: form.message,
-            },
-          }),
-        }
-      );
+      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service_id: CONFIG.emailjs.serviceId,
+          template_id: CONFIG.emailjs.templateId,
+          user_id: CONFIG.emailjs.publicKey,
+          template_params: {
+            from_name: form.name,
+            from_email: form.email,
+            message: form.message,
+          },
+        }),
+      });
 
       if (res.ok) {
         setStatus("success");
         setForm({ name: "", email: "", message: "" });
         setTimeout(() => setStatus("idle"), 4000);
-      } else {
-        throw new Error();
-      }
+      } else throw new Error();
     } catch {
       setStatus("error");
       setTimeout(() => setStatus("idle"), 4000);
@@ -105,167 +93,96 @@ export default function ContactSection() {
   ];
 
   return (
-    <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+    <section id="contact" className="contact-wrapper" style={{ minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center", padding: "72px 24px" }}>
+      <div className="form-card" style={{ width: "100%", maxWidth: "820px", background: "rgba(13,21,36,0.85)", borderRadius: "20px", padding: "40px", border: "1px solid rgba(255,255,255,0.08)" }}>
+        
+        <h2 style={{ textAlign: "center", fontSize: "clamp(24px,4vw,38px)", color: "#fff", marginBottom: "36px", fontFamily: "'DM Sans', sans-serif" }}>
+          Let’s Build Something{" "}
+          <span style={{ background: "linear-gradient(90deg,#2563eb,#38bdf8)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            Extraordinary
+          </span>
+        </h2>
 
-        * { box-sizing: border-box; }
-
-        .contact-wrapper {
-          min-height: 100vh;
-          padding: 72px 24px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .form-card {
-          width: 100%;
-          max-width: 820px;
-          background: rgba(13,21,36,0.85);
-          border-radius: 20px;
-          padding: 40px;
-          border: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .form-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 20px;
-        }
-
-        .socials {
-          display: flex;
-          justify-content: center;
-          gap: 28px;
-          margin-top: 32px;
-        }
-
-        @media (max-width: 768px) {
-          .form-grid {
-            grid-template-columns: 1fr;
-          }
-          .form-card {
-            padding: 28px;
-          }
-        }
-      `}</style>
-
-      <section id="contact" className="contact-wrapper">
-        <div className="form-card">
-          <h2
-            style={{
-              textAlign: "center",
-              fontSize: "clamp(24px,4vw,38px)",
-              color: "#fff",
-              marginBottom: "36px",
-              fontFamily: "'DM Sans', sans-serif",
-            }}
+        {/* DOWNLOAD CV BUTTON */}
+        <div style={{ textAlign: "center", marginBottom: "24px" }}>
+          <a
+            href={CONFIG.cvLink}
+            download
+            className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-full transition-all"
           >
-            Let’s Build Something{" "}
-            <span
-              style={{
-                background: "linear-gradient(90deg,#2563eb,#38bdf8)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              Extraordinary
-            </span>
-          </h2>
+            Download CV
+          </a>
+        </div>
 
-          {/* DOWNLOAD CV BUTTON */}
-          <div style={{ textAlign: "center", marginBottom: "24px" }}>
-            <a
-              href={CONFIG.cvLink}
-              download
-              className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-full transition-all"
-            >
-              Download CV
-            </a>
-          </div>
-
-          <div className="form-grid">
-            <div>
-              <label style={labelStyle}>Name</label>
-              <input
-                name="name"
-                value={form.name}
-                onChange={handleChange}
-                onFocus={() => setFocused("name")}
-                onBlur={() => setFocused("")}
-                style={inputStyle(focused === "name")}
-              />
-            </div>
-
-            <div>
-              <label style={labelStyle}>Email</label>
-              <input
-                name="email"
-                type="email"
-                value={form.email}
-                onChange={handleChange}
-                onFocus={() => setFocused("email")}
-                onBlur={() => setFocused("")}
-                style={inputStyle(focused === "email")}
-              />
-            </div>
-          </div>
-
-          <div style={{ marginTop: "20px" }}>
-            <label style={labelStyle}>Message</label>
-            <textarea
-              name="message"
-              rows={5}
-              value={form.message}
+        <div className="form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
+          <div>
+            <label style={labelStyle}>Name</label>
+            <input
+              name="name"
+              value={form.name}
               onChange={handleChange}
-              onFocus={() => setFocused("message")}
+              onFocus={() => setFocused("name")}
               onBlur={() => setFocused("")}
-              style={{ ...inputStyle(focused === "message") }}
+              style={inputStyle(focused === "name")}
             />
           </div>
 
-          <button
-            onClick={handleSubmit}
-            disabled={status === "sending"}
-            style={{
-              marginTop: "28px",
-              width: "100%",
-              padding: "18px",
-              borderRadius: "10px",
-              border: "none",
-              fontWeight: 700,
-              color: "#fff",
-              background:
-                status === "success"
-                  ? "#22c55e"
-                  : status === "error"
-                  ? "#ef4444"
-                  : "linear-gradient(90deg,#2563eb,#38bdf8)",
-              cursor: "pointer",
-            }}
-          >
-            {status === "idle" && "Send Message"}
-            {status === "sending" && "Sending..."}
-            {status === "success" && "Message Sent!"}
-            {status === "error" && "Something went wrong"}
-          </button>
-
-          <div className="socials">
-            {socials.map((s, i) => (
-              <a
-                key={i}
-                href={s.href}
-                target="_blank"
-                rel="noreferrer"
-                style={{ color: "rgba(255,255,255,0.6)" }}
-              >
-                {s.icon}
-              </a>
-            ))}
+          <div>
+            <label style={labelStyle}>Email</label>
+            <input
+              name="email"
+              type="email"
+              value={form.email}
+              onChange={handleChange}
+              onFocus={() => setFocused("email")}
+              onBlur={() => setFocused("")}
+              style={inputStyle(focused === "email")}
+            />
           </div>
         </div>
-      </section>
-    </>
+
+        <div style={{ marginTop: "20px" }}>
+          <label style={labelStyle}>Message</label>
+          <textarea
+            name="message"
+            rows={5}
+            value={form.message}
+            onChange={handleChange}
+            onFocus={() => setFocused("message")}
+            onBlur={() => setFocused("")}
+            style={{ ...inputStyle(focused === "message") }}
+          />
+        </div>
+
+        <button
+          onClick={handleSubmit}
+          disabled={status === "sending"}
+          style={{
+            marginTop: "28px",
+            width: "100%",
+            padding: "18px",
+            borderRadius: "10px",
+            border: "none",
+            fontWeight: 700,
+            color: "#fff",
+            background: status === "success" ? "#22c55e" : status === "error" ? "#ef4444" : "linear-gradient(90deg,#2563eb,#38bdf8)",
+            cursor: "pointer",
+          }}
+        >
+          {status === "idle" && "Send Message"}
+          {status === "sending" && "Sending..."}
+          {status === "success" && "Message Sent!"}
+          {status === "error" && "Something went wrong"}
+        </button>
+
+        <div className="socials" style={{ display: "flex", justifyContent: "center", gap: "28px", marginTop: "32px" }}>
+          {socials.map((s, i) => (
+            <a key={i} href={s.href} target="_blank" rel="noreferrer" style={{ color: "rgba(255,255,255,0.6)" }}>
+              {s.icon}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

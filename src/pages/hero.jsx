@@ -153,8 +153,8 @@ export default function PortfolioHero() {
             size={30}
           />
           <Briefcase
-            onClick={() => scrollTo("project")}
-            className={navIconClass("project")}
+            onClick={() => scrollTo("about")}
+            className={navIconClass("about")}
             size={30}
           />
 
@@ -168,8 +168,8 @@ export default function PortfolioHero() {
             size={30}
           />
           <Layers
-            onClick={() => scrollTo("about")}
-            className={navIconClass("about")}
+            onClick={() => scrollTo("project")}
+            className={navIconClass("project")}
             size={30}
           />
         </div>
